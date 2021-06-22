@@ -1,3 +1,5 @@
+# Code adapted from Musical_Genre_Classification by lelandroberts97 from https://github.com/lelandroberts97/Musical_Genre_Classification/
+
 import os
 import matplotlib.pyplot as plt
 import numpy as np
@@ -19,6 +21,7 @@ if not os.path.isdir(train_src) or not os.path.isdir(test_src):
     print("Invalid source folder(s).")
     exit(1)
 
+# Dictionary maps the artist to an integer
 label_dict = {
     'chetbaker': 0,
     'billevans': 1,
@@ -37,6 +40,7 @@ label_dict = {
     'tchaikovsky': 14
 }
 
+# Method to find the artist label from the name of the file
 def get_text_label(file_name):
     segment_and_artist = file_name.split("_")[0]
     if segment_and_artist[1:] in label_dict:
@@ -114,6 +118,12 @@ cnn_model.add(Dense(64, activation='relu'))
 # Adding a dropout layer for regularization
 cnn_model.add(Dropout(0.25))
 
+# Adding a dense layer with 64 neurons
+cnn_model.add(Dense(64, activation='relu'))
+
+# Adding a dropout layer for regularization
+cnn_model.add(Dropout(0.25))
+
 # Adding an output layer
 cnn_model.add(Dense(15, activation='softmax'))
 
@@ -129,7 +139,7 @@ history = cnn_model.fit(features_train,
                         labels_train, 
                         batch_size=32,
                         validation_data=(features_test, labels_test),
-                        epochs=20)
+                        epochs=40)
 
 predictions = cnn_model.predict(features_test, verbose=0)
 label_counts = dict(Counter(test_data['label']))
