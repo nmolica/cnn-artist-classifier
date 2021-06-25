@@ -12,4 +12,7 @@ Depending on your machine, these should be easily obtainable with `pip install <
 
 ## Important Notes
 
-You shouldn't need to run any of the data processing scripts, as we've already run them and uploaded the processed data to this repo. Note that this data is ~300Mb, so it will take a little while to download when you clone the repo. You also shouldn't need to run the training script `model.py`, as we already did the training and saved a pretrained version in the trained_model directory. Use the `demo.py` script to test out the model. 
+You shouldn't need to run any of the data processing scripts, as we've already run them and uploaded the processed data to this repo. Note that this data is ~300Mb, so it will take a little while to download when you clone the repo. The training data can be found in `bw_train` and the test data is in `bw_test`.
+
+## Training the model
+To train the model, it will take approximately 30 minutes for the 25 epochs. In your shell, run `python3 model.py`. When prompted, input `bw_train` for the directory with training data and `bw_test` for the testing data directory. The terminal will show the progress of the trainings and output the accuracy of the test data at the end.
