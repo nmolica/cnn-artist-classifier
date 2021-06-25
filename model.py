@@ -139,7 +139,5 @@ history = cnn_model.fit(features_train,
                         validation_data=(features_test, labels_test),
                         epochs=25)
 
-cnn_model.save('trained_model')
-
 score = cnn_model.evaluate(features_test, labels_test)
 print("Test accuracy: ",  score[1])
