@@ -132,31 +132,14 @@ cnn_model.compile(loss='categorical_crossentropy',
                   optimizer='adam',
                   metrics=['accuracy'])
 
-cnn_model.save('trained_model')
-
 # Fitting our neural network
 history = cnn_model.fit(features_train,
                         labels_train, 
                         batch_size=32,
                         validation_data=(features_test, labels_test),
-                        epochs=40)
+                        epochs=25)
 
-predictions = cnn_model.predict(features_test, verbose=0)
-label_counts = dict(Counter(test_data['label']))
-print(confusion_matrix(np.argmax(labels_test, 1), np.argmax(predictions, 1)))
-
-train_accuracy = history.history['accuracy']
-test_accuracy = history.history['val_accuracy']
-
-plt.figure(figsize = (16,8))
-plt.plot(train_accuracy, label='Training Accuracy', color='blue')
-plt.plot(test_accuracy, label='Testing Accuracy', color='red')
-plt.title('Training and Testing Accuracy by Epoch', fontsize = 25)
-plt.xlabel('Epoch', fontsize = 18)
-plt.ylabel('Accuracy', fontsize = 18)
-plt.xticks(range(1,21), range(1,21))
-plt.savefig("results.png", bbox_inches='tight', pad_inches=0.2)
-plt.close()
+cnn_model.save('trained_model')
 
 score = cnn_model.evaluate(features_test, labels_test)
 print("Test accuracy: ",  score[1])
